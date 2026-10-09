@@ -85,3 +85,4 @@ for symbol in SYMBOLS:
             send_telegram(signal)
     except Exception as exc:
         print(f"{symbol}: scan failed: {exc}")
+send_telegram("Bot is working sucessfully!)
