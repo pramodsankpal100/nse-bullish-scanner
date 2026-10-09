@@ -30,11 +30,11 @@ def send_telegram(message):
 def scan(symbol):
     ticker = symbol + ".NS"
     df = yf.download(
-        ticker, period="5d", interval="15m",
+        ticker, period="7d", interval="15m",
         progress=False, auto_adjust=True
     )
 
-    if df.empty or len(df) < 55:
+    if df.empty or len(df) < 35:
         return None
 
     if isinstance(df.columns, pd.MultiIndex):
@@ -43,7 +43,7 @@ def scan(symbol):
     close = df["Close"].dropna()
     volume = df["Volume"].reindex(close.index).fillna(0)
 
-    if len(close) < 55:
+    if len(close) < 35:
         return None
 
     ema20 = close.ewm(span=20, adjust=False).mean()
